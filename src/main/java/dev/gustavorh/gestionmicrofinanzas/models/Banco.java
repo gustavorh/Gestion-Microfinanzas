@@ -7,6 +7,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
@@ -18,15 +22,26 @@ public class Banco {
     @Column(name = "id_banco")
     private Long idBanco;
 
+    @NotBlank
+    @Size(min = 2, max = 100)
     private String nombre;
 
+    @NotBlank
+    @Size(min = 2)
     private String direccion;
 
+    @NotBlank
+    @Size(min = 3, max = 10)
     private String telefono;
 
+    @NotBlank
+    @Size(min = 3, max = 10)
+    // TODO: Change to regex.
     private String email;
 
     @Column(name = "tasa_interes_base")
+    @NotNull
+    @Min(1)
     private Double tasaInteresBase;
 
     @OneToMany(mappedBy = "banco")
@@ -78,5 +93,13 @@ public class Banco {
 
     public void setTasaInteresBase(Double tasaInteresBase) {
         this.tasaInteresBase = tasaInteresBase;
+    }
+
+    public List<Prestamo> getPrestamos() {
+        return prestamos;
+    }
+
+    public void setPrestamos(List<Prestamo> prestamos) {
+        this.prestamos = prestamos;
     }
 }

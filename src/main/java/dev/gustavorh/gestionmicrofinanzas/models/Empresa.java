@@ -10,6 +10,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.Date;
 import java.util.List;
@@ -22,15 +25,25 @@ public class Empresa {
     @Column(name = "id_empresa")
     private Long idEmpresa;
 
+    @NotBlank
+    @Size(min = 2, max = 100)
     private String nombre;
 
+    @NotBlank
+    @Size(min = 2)
     private String direccion;
 
+    @NotBlank
+    @Size(min = 3, max = 10)
     private String telefono;
 
+    @NotBlank
+    @Size(min = 3, max = 10)
+    // TODO: Change to regex.
     private String email;
 
     @Column(name = "fecha_registro")
+    @NotNull
     private Date fechaRegistro;
 
     @Enumerated(EnumType.STRING)
@@ -93,5 +106,13 @@ public class Empresa {
 
     public void setEstado(Estado estado) {
         this.estado = estado;
+    }
+
+    public List<Prestamo> getPrestamos() {
+        return prestamos;
+    }
+
+    public void setPrestamos(List<Prestamo> prestamos) {
+        this.prestamos = prestamos;
     }
 }

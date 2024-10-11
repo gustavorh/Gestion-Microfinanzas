@@ -11,6 +11,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 
@@ -22,9 +24,12 @@ public class Pago {
     @Column(name = "id_pago")
     private Long idPago;
 
+    @NotNull
+    @Min(1000)
     private Double monto;
 
     @Column(name = "fecha_pago")
+    @NotNull
     private Date fechaPago;
 
     @Enumerated(EnumType.STRING)

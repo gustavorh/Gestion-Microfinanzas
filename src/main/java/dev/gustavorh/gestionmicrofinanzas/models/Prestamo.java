@@ -12,6 +12,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Date;
 import java.util.List;
@@ -25,21 +27,29 @@ public class Prestamo {
     private Long idPrestamo;
 
     @Column(name = "monto_solicitado")
+    @NotNull
+    @Min(1000)
     private Double montoSolicitado;
 
     @Column(name = "tasa_interes")
+    @NotNull
+    @Min(1)
     private Double tasaInteres;
 
     @Column(name = "plazo_meses")
+    @NotNull
+    @Min(1)
     private Integer plazoMeses;
 
     @Enumerated(EnumType.STRING)
     private Estado estado;
 
     @Column(name = "fecha_solicitud")
+    @NotNull
     private Date fechaSolicitud;
 
     @Column(name = "fecha_aprobacion")
+    @NotNull
     private Date fechaAprobacion;
 
     @ManyToOne
@@ -52,6 +62,30 @@ public class Prestamo {
 
     @OneToMany(mappedBy = "prestamo")
     private List<Pago> pagos;
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Banco getBanco() {
+        return banco;
+    }
+
+    public void setBanco(Banco banco) {
+        this.banco = banco;
+    }
+
+    public List<Pago> getPagos() {
+        return pagos;
+    }
+
+    public void setPagos(List<Pago> pagos) {
+        this.pagos = pagos;
+    }
 
     public Long getIdPrestamo() {
         return idPrestamo;

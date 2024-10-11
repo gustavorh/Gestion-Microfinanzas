@@ -2,7 +2,6 @@ package dev.gustavorh.gestionmicrofinanzas.services;
 
 import dev.gustavorh.gestionmicrofinanzas.models.Banco;
 import dev.gustavorh.gestionmicrofinanzas.repositories.BancoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,11 +36,28 @@ public class BancoServiceImpl implements BancoService {
 
     @Override
     @Transactional
-    public Optional<Banco> deleteById(Banco banco) {
+    public Optional<Banco> update(Long id, Banco banco) {
+        Optional<Banco> bancoOptional = bancoRepository.findById(id);
+        if(bancoOptional.isPresent()) {
+            Banco bancoDb = bancoOptional.orElseThrow();
+            bancoDb.setNombre(banco.getNombre());
+            bancoDb.setDireccion(banco.getDireccion());
+            bancoDb.setTelefono(banco.getTelefono());
+            bancoDb.setEmail(banco.getEmail());
+            bancoDb.setTasaInteresBase(banco.getTasaInteresBase());
+            bancoDb.setPrestamos(banco.getPrestamos());
+
+            return Optional.of(bancoRepository.save(bancoDb));
+        }
+        return bancoOptional;
+    }
+
+    @Override
+    @Transactional
+    public Optional<Banco> delete(Long id) {
         // bancoRepository.findById(id)
-        Optional<Banco> bancoOptional = bancoRepository.findById(banco.getIdBanco());
+        Optional<Banco> bancoOptional = bancoRepository.findById(id);
         bancoOptional.ifPresent(bancoRepository::delete);
-        bancoRepository.delete(banco);
 
         return bancoOptional;
     }

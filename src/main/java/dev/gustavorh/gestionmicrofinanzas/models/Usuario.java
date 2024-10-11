@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "usuarios")
@@ -17,9 +19,14 @@ public class Usuario {
     @Column(name = "id_usuario")
     private Integer idUsuario;
 
-    @Column(name = "usuario")
+    @Column(name = "usuario", unique = true)
+    @NotBlank
+    @Size(min = 3, max = 20)
     private String nombreUsuario;
+
     @Column(name = "password_hash")
+    @NotBlank
+    @Size(min = 6, max = 100)
     private String passwordHash;
 
     @ManyToOne
