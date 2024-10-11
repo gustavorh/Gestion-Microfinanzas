@@ -1,6 +1,12 @@
 package dev.gustavorh.gestionmicrofinanzas.models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 import java.util.List;
 
@@ -20,7 +26,7 @@ public class Banco {
 
     private String email;
 
-    @Column(name = "tasaInteresBase")
+    @Column(name = "tasa_interes_base")
     private Double tasaInteresBase;
 
     @OneToMany(mappedBy = "banco")
