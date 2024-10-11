@@ -53,18 +53,6 @@ public class Prestamo {
     @OneToMany(mappedBy = "prestamo")
     private List<Pago> pagos;
 
-    public Prestamo() {
-    }
-
-    public Prestamo(Double montoSolicitado, Double tasaInteres, Integer plazoMeses, Estado estado, Date fechaSolicitud, Date fechaAprobacion) {
-        this.montoSolicitado = montoSolicitado;
-        this.tasaInteres = tasaInteres;
-        this.plazoMeses = plazoMeses;
-        this.estado = estado;
-        this.fechaSolicitud = fechaSolicitud;
-        this.fechaAprobacion = fechaAprobacion;
-    }
-
     public Long getIdPrestamo() {
         return idPrestamo;
     }

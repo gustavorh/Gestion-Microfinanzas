@@ -32,17 +32,6 @@ public class Banco {
     @OneToMany(mappedBy = "banco")
     private List<Prestamo> prestamos;
 
-    public Banco() {
-    }
-
-    public Banco(String nombre, String direccion, String telefono, String email, Double tasaInteresBase) {
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.email = email;
-        this.tasaInteresBase = tasaInteresBase;
-    }
-
     public Long getIdBanco() {
         return idBanco;
     }

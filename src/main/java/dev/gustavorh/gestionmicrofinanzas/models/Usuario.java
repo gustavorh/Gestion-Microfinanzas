@@ -30,16 +30,6 @@ public class Usuario {
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
 
-    public Usuario() {
-    }
-
-    public Usuario(String nombreUsuario, String passwordHash, Rol rol, Empresa empresa) {
-        this.nombreUsuario = nombreUsuario;
-        this.passwordHash = passwordHash;
-        this.rol = rol;
-        this.empresa = empresa;
-    }
-
     public Integer getIdUsuario() {
         return idUsuario;
     }

@@ -24,15 +24,6 @@ public class Rol {
     @OneToMany(mappedBy = "rol")
     private List<Usuario> usuarios;
 
-    public Rol() {
-    }
-
-    public Rol(String nombre, String descripcion, List<Usuario> usuarios) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.usuarios = usuarios;
-    }
-
     public Integer getIdRol() {
         return idRol;
     }

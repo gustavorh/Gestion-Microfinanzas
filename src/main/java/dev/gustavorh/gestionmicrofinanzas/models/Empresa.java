@@ -39,18 +39,6 @@ public class Empresa {
     @OneToMany(mappedBy = "empresa")
     private List<Prestamo> prestamos;
 
-    public Empresa() {
-    }
-
-    public Empresa(String nombre, String direccion, String telefono, String email, Date fechaRegistro, Estado estado) {
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.email = email;
-        this.fechaRegistro = fechaRegistro;
-        this.estado = estado;
-    }
-
     public Long getIdEmpresa() {
         return idEmpresa;
     }

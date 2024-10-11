@@ -34,16 +34,6 @@ public class Pago {
     @JoinColumn(name = "prestamo_id")
     private Prestamo prestamo;
 
-    public Pago() {
-    }
-
-    public Pago(Double monto, Date fechaPago, Estado estado, Prestamo prestamo) {
-        this.monto = monto;
-        this.fechaPago = fechaPago;
-        this.estado = estado;
-        this.prestamo = prestamo;
-    }
-
     public Long getIdPago() {
         return idPago;
     }
