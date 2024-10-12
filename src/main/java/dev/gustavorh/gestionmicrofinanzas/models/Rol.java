@@ -1,66 +1,43 @@
 package dev.gustavorh.gestionmicrofinanzas.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@SuperBuilder
 @Entity
 @Table(name = "roles")
-public class Rol {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_rol")
-    private Integer idRol;
-
-    @Column(unique = true)
+public class Rol extends BaseEntity {
+    @Column(unique = true, nullable = false)
     @NotBlank
     @Size(min = 2, max = 20)
     private String nombre;
 
+    @Column(nullable = false)
     @NotBlank
     @Size(min = 2)
     private String descripcion;
 
     @OneToMany(mappedBy = "rol")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Usuario> usuarios;
 
-    public Integer getIdRol() {
-        return idRol;
-    }
-
-    public void setIdRol(Integer idRol) {
-        this.idRol = idRol;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
+    public Rol() {
+        this.usuarios = new ArrayList<>();
     }
 }

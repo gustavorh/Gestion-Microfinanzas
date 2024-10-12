@@ -5,114 +5,58 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
 import java.util.List;
 
+@Data
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder
 @Entity
 @Table(name = "empresas")
-public class Empresa {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_empresa")
-    private Long idEmpresa;
-
+public class Empresa extends BaseEntity {
+    @Column(nullable = false, length = 100)
     @NotBlank
     @Size(min = 2, max = 100)
     private String nombre;
 
+    @Column(nullable = false)
     @NotBlank
     @Size(min = 2)
     private String direccion;
 
+    @Column(nullable = false, length = 10)
     @NotBlank
     @Size(min = 3, max = 10)
     private String telefono;
 
+    @Column(nullable = false)
     @NotBlank
     @Size(min = 3, max = 10)
     // TODO: Change to regex.
     private String email;
 
-    @Column(name = "fecha_registro")
+    @Column(nullable = false)
     @NotNull
     private Date fechaRegistro;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Estado estado;
 
     @OneToMany(mappedBy = "empresa")
     private List<Prestamo> prestamos;
-
-    public Long getIdEmpresa() {
-        return idEmpresa;
-    }
-
-    public void setIdEmpresa(Long idEmpresa) {
-        this.idEmpresa = idEmpresa;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Date getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    public void setFechaRegistro(Date fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
-
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
-
-    public List<Prestamo> getPrestamos() {
-        return prestamos;
-    }
-
-    public void setPrestamos(List<Prestamo> prestamos) {
-        this.prestamos = prestamos;
-    }
 }

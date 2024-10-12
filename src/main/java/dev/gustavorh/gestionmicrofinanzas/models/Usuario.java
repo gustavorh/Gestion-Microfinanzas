@@ -2,29 +2,33 @@ package dev.gustavorh.gestionmicrofinanzas.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
+@Data
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@SuperBuilder
 @Entity
 @Table(name = "usuarios")
-public class Usuario {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario")
-    private Integer idUsuario;
-
-    @Column(name = "usuario", unique = true)
+public class Usuario extends BaseEntity {
+    @Column(name = "usuario", unique = true, nullable = false, length = 20)
     @NotBlank
     @Size(min = 3, max = 20)
     private String nombreUsuario;
 
-    @Column(name = "password_hash")
+    @Column(nullable = false)
     @NotBlank
     @Size(min = 6, max = 100)
     private String passwordHash;
@@ -37,43 +41,14 @@ public class Usuario {
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
 
-    public Integer getIdUsuario() {
-        return idUsuario;
+    @Transient
+    private boolean isAdmin;
+
+    public boolean isAdmin() {
+        return isAdmin;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
-
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
-    public Rol getRol() {
-        return rol;
-    }
-
-    public void setRol(Rol rol) {
-        this.rol = rol;
-    }
-
-    public Empresa getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }
