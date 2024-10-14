@@ -4,7 +4,6 @@ import dev.gustavorh.gestionmicrofinanzas.models.Rol;
 import dev.gustavorh.gestionmicrofinanzas.models.Usuario;
 import dev.gustavorh.gestionmicrofinanzas.repositories.RolRepository;
 import dev.gustavorh.gestionmicrofinanzas.repositories.UsuarioRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,12 +14,12 @@ import java.util.Optional;
 public class UsuarioServiceImpl implements UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final RolRepository rolRepository;
-    private final PasswordEncoder passwordEncoder;
+    //private final PasswordEncoder passwordEncoder;
 
-    public UsuarioServiceImpl(UsuarioRepository usuarioRepository, RolRepository rolRepository, PasswordEncoder passwordEncoder) {
+    public UsuarioServiceImpl(UsuarioRepository usuarioRepository, RolRepository rolRepository/*, PasswordEncoder passwordEncoder*/) {
         this.usuarioRepository = usuarioRepository;
         this.rolRepository = rolRepository;
-        this.passwordEncoder = passwordEncoder;
+        //this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -39,7 +38,7 @@ public class UsuarioServiceImpl implements UsuarioService {
             Optional<Rol> optionalRol = rolRepository.findByNombre("ROL_USER");
             optionalRol.ifPresent(usuario::setRol);
         }
-        usuario.setPasswordHash(passwordEncoder.encode(usuario.getPasswordHash()));
+        //usuario.setPasswordHash(passwordEncoder.encode(usuario.getPasswordHash()));
 
         return usuarioRepository.save(usuario);
     }

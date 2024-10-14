@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>{algo}</title>
+    <title>Bancos</title>
 </head>
 <body>
-
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Dirección</th>
+        <th>Teléfono</th>
+        <th>Email</th>
+        <th>Tasa Interés Base</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="bancos:${bancos}">
+        <td th:text="${bancos.id}"></td>
+        <td th:text="${bancos.nombre}"></td>
+        <td th:text="${bancos.direccion}"></td>
+        <td th:text="${bancos.telefono}"></td>
+        <td th:text="${bancos.email}"></td>
+        <td th:text="${bancos.tasaInteresBase}"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

@@ -41,7 +41,7 @@ public class Banco extends BaseEntity {
     private String telefono;
 
     @NotBlank
-    @Size(min = 3, max = 10)
+    @Size(min = 3)
     @Column(nullable = false)
     // TODO: Change to regex.
     private String email;
