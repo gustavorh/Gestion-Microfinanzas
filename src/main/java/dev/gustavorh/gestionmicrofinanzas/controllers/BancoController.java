@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -29,6 +30,7 @@ public class BancoController {
 
     @GetMapping
     public String findAll(Model model) {
+        model.addAttribute("titulo", "Ver Bancos");
         model.addAttribute("bancos", bancoService.findAll());
         return "bancos";
     }
@@ -42,9 +44,19 @@ public class BancoController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping
-    public ResponseEntity<?> save(@Valid @RequestBody Banco banco, BindingResult bindingResult) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(bancoService.save(banco));
+    @GetMapping("/crear-banco")
+    public String create(Model model) {
+        Banco banco = new Banco();
+        model.addAttribute("titulo", "Crear Banco");
+        model.addAttribute("banco", banco);
+        return "crear-banco";
+    }
+
+    @PostMapping("/crear-banco")
+    public String save(@Valid @ModelAttribute("banco") Banco banco, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {}
+        bancoService.save(banco);
+        return "redirect:/api/bancos";
     }
 
     @PutMapping("/{id}")
