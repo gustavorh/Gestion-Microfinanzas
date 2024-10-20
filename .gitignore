@@ -34,3 +34,4 @@ build/
 
 ### APP PROP
 /src/main/resources/env.properties
+/src/main/resources/application.yaml
