@@ -53,8 +53,12 @@ public class BancoController {
     }
 
     @PostMapping("/crear-banco")
-    public String save(@Valid @ModelAttribute("banco") Banco banco, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {}
+    public String save(@Valid Banco banco, BindingResult bindingResult, Model model) {
+        // @ModelAttribute("") especifica el nombre del modelo que retornamos a la vista.
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("titulo", "Crear Banco");
+            return "crear-banco";
+        }
         bancoService.save(banco);
         return "redirect:/api/bancos";
     }

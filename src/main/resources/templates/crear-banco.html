@@ -32,23 +32,28 @@
       <form th:object="${banco}" th:action="@{/api/bancos/crear-banco}" method="post">
         <div class="form-group">
           <label>Nombre</label>
-          <input name="nombre" id="nombre" placeholder="Ingrese el nombre del banco" class="form-control" type="text" th:field="*{nombre}" />
+          <input name="nombre" id="nombre" placeholder="Ingrese el nombre del banco" class="form-control" type="text" th:field="*{nombre}" th:errorclass="'alert alert-danger'" />
+          <small th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="form-text text-danger" ></small>
         </div>
         <div class="form-group">
           <label>Dirección</label>
-          <input name="direccion" id="direccion" placeholder="Ingrese la dirección del banco" class="form-control" type="text" th:field="*{direccion}" />
+          <input name="direccion" id="direccion" placeholder="Ingrese la dirección del banco" class="form-control" type="text" th:field="*{direccion}" th:errorclass="'alert alert-danger'" />
+          <small th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="form-text text-danger" ></small>
         </div>
         <div class="form-group">
           <label>Teléfono</label>
-          <input name="telefono" id="telefono" placeholder="Ingrese el teléfono de contacto del banco" class="form-control" type="text" th:field="*{telefono}" />
+          <input name="telefono" id="telefono" placeholder="Ingrese el teléfono de contacto del banco" class="form-control" type="text" th:field="*{telefono}" th:errorclass="'alert alert-danger'" />
+          <small th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" class="form-text text-danger" ></small>
         </div>
         <div class="form-group">
           <label>Email</label>
-          <input name="email" id="email" placeholder="Ingrese el email del banco" class="form-control" type="text" th:field="*{email}" />
+          <input name="email" id="email" placeholder="Ingrese el email del banco" class="form-control" type="text" th:field="*{email}" th:errorclass="'alert alert-danger'" />
+          <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="form-text text-danger" ></small>
         </div>
         <div class="form-group">
           <label>Tasa Interes Base</label>
-          <input name="tasaInteresBase" id="tasaInteresBase" placeholder="Ingrese la tasa de interés base" class="form-control" type="text" th:field="*{tasaInteresBase}" />
+          <input name="tasaInteresBase" id="tasaInteresBase" placeholder="Ingrese la tasa de interés base" class="form-control" type="text" th:field="*{tasaInteresBase}" th:errorclass="'alert alert-danger'" />
+          <small th:if="${#fields.hasErrors('tasaInteresBase')}" th:errors="*{tasaInteresBase}" class="form-text text-danger" ></small>
         </div>
         <div class="box-footer">
           <button type="submit" class="btn btn-primary">Guardar</button>
