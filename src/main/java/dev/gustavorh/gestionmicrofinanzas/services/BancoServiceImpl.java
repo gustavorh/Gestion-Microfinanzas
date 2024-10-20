@@ -30,8 +30,8 @@ public class BancoServiceImpl implements BancoService {
 
     @Override
     @Transactional
-    public Banco save(Banco banco) {
-        return bancoRepository.save(banco);
+    public void save(Banco banco) {
+        bancoRepository.save(banco);
     }
 
     @Override

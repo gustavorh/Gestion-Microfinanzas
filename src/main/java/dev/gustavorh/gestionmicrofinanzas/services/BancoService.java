@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface BancoService {
     List<Banco> findAll();
     Optional<Banco> findById(Long id);
-    Banco save(Banco banco);
+    void save(Banco banco);
     Optional<Banco> update(Long id, Banco banco);
     Optional<Banco> delete(Long id); // Long id
 }
